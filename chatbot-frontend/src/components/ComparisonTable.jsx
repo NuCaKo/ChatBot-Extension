@@ -10,7 +10,14 @@ const ComparisonTable = ({ matrix }) => {
                     <tr>
                         <th className="attribute-col">Özellikler</th>
                         {products.map((p, idx) => (
-                            <th key={idx}>{p.name}</th>
+                            <th key={idx} className="comparison-th-product">
+                                {p.image_url && (
+                                    <div className="comparison-image-container">
+                                        <img src={p.image_url} alt={p.name} className="comparison-product-image" />
+                                    </div>
+                                )}
+                                <div className="comparison-product-name">{p.name}</div>
+                            </th>
                         ))}
                     </tr>
                 </thead>
