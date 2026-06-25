@@ -1,0 +1,140 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    /* Karaca'nın sade tipografisine benzer, temiz ve modern fontlar */
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    /* Iframe içerisindeyken arkaplanın şeffaf olması için */
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#root {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; /* Widget'ı aşağıya hizalar */
+}
+
+.chat-container {
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    border-radius: 12px; /* Daha keskin, modern köşeler */
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08); /* Çok daha yumuşak ve premium bir gölge */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid #f0f0f0; /* Çok ince bir dış çerçeve */
+}
+
+.chat-header {
+    background: #ffffff;
+    color: #111111; /* Koyu antrasit siyah */
+    padding: 12px 15px;
+    text-align: center;
+    font-size: 1.05rem;
+    font-weight: 600;
+    border-bottom: 1px solid #eaeaea; /* Başlığı içerikten ayıran ince çizgi */
+    letter-spacing: 0.3px;
+}
+
+.chat-header h2 {
+    font-size: 0.95rem; /* Fontu daha zarif boyutlara çektik */
+    font-weight: 600;
+    margin: 0; /* Tarayıcının varsayılan kaba boşluğunu sildik */
+    letter-spacing: 0.5px;
+}
+
+.chat-messages {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    background: #ffffff;
+}
+
+.message-bubble {
+    max-width: 85%;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    word-wrap: break-word;
+}
+
+
+.message-bubble.user {
+    align-self: flex-end;
+    color: #111111 !important;
+    border-bottom-right-radius: 2px;
+}
+
+/* Bot Mesajı: Temiz ve Açık Gri */
+.message-bubble.bot {
+    align-self: flex-start;
+    background: #f5f5f5;
+    color: #222222;
+    border-bottom-left-radius: 2px;
+}
+
+.message-bubble.typing {
+    color: #111111 !important;
+    font-style: italic;
+    background: transparent;
+    padding: 0 10px;
+}
+
+.chat-input-area {
+    display: flex;
+    padding: 14px 16px;
+    background: #ffffff;
+    border-top: 1px solid #eaeaea;
+    gap: 10px;
+}
+
+.chat-input-area input {
+    flex: 1;
+    padding: 12px 18px;
+    border: 1px solid #e5e5e5;
+    border-radius: 24px; /* Yuvarlak input alanı */
+    outline: none;
+    font-size: 0.9rem;
+    background: black;
+    transition: all 0.2s ease;
+}
+
+.chat-input-area input:focus {
+    border-color: black;
+}
+
+.chat-input-area button {
+    padding: 0 20px;
+    background: #111111;
+    color: white;
+    border: none;
+    border-radius: 24px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: background 0.2s, opacity 0.2s;
+}
+
+.chat-input-area button:hover {
+    background: #333333;
+}
+
+.chat-input-area button:disabled {
+    background: #f3f4f6;
+    color: #9ca3af;
+    cursor: not-allowed;
+}
