@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import axios from 'axios'
 import './App.css'
+import BotMessage from './components/BotMessage'
 
 function App() {
     const [messages, setMessages] = useState([
@@ -16,28 +17,34 @@ function App() {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [messages]);
 
-    const handleSendMessage = async () => {
-        if (!input.trim()) return;
+    const handleSendMessage = async (customMessage = null, hiddenQuery = null) => {
+        const displayMessage = typeof customMessage === 'string' ? customMessage : input;
+        const queryToSend = typeof hiddenQuery === 'string' ? hiddenQuery : displayMessage;
+
+        if (!displayMessage.trim()) return;
 
         // Kullanıcının mesajını ekle
-        const userMessage = { sender: 'user', text: input };
+        const userMessage = { sender: 'user', text: displayMessage };
         setMessages((prev) => [...prev, userMessage]);
-        setInput('');
+        if (typeof customMessage !== 'string') {
+            setInput('');
+        }
         setIsLoading(true);
 
         try {
             // Cloudflare tüneli üzerinden güvenli backend bağlantısı
             const response = await axios.post('https://programmer-cycles-net-simulation.trycloudflare.com/api/chat', {
-                message: userMessage.text
+                message: queryToSend
             });
 
             // Gelen cevabı ekrana yaz
-            const botMessage = { sender: 'bot', text: response.data.response };
+            const botData = response.data.response || response.data;
+            const botMessage = { sender: 'bot', data: botData };
             setMessages((prev) => [...prev, botMessage]);
 
         } catch (error) {
             console.error("Hata:", error);
-            setMessages((prev) => [...prev, { sender: 'bot', text: 'Sunucuya bağlanırken bir hata oluştu. Lütfen daha sonra tekrar deneyin.' }]);
+            setMessages((prev) => [...prev, { sender: 'bot', data: 'Sunucuya bağlanırken bir hata oluştu. Lütfen daha sonra tekrar deneyin.' }]);
         } finally {
             setIsLoading(false);
         }
@@ -49,13 +56,17 @@ function App() {
                 <h2>Destek Asistanı</h2>
             </div>
 
-
-                <div className="chat-messages">
-                    {messages.map((msg, index) => (
-                        <div key={index} className={`message-bubble ${msg.sender}`}>
-                            {msg.text}  {/* Buranın msg.text olduğundan emin ol, msg.message veya başka bir şey kalmış olmasın */}
-                        </div>
-                    ))}
+            <div className="chat-messages">
+                {messages.map((msg, index) => {
+                    if (msg.sender === 'user') {
+                        return (
+                            <div key={index} className="message-bubble user">
+                                {msg.text}
+                            </div>
+                        );
+                    }
+                    return <BotMessage key={index} message={msg.data || msg.text} onQuickReply={handleSendMessage} />;
+                })}
                 {isLoading && (
                     <div className="message-bubble bot typing">
                         Asistan yazıyor...
@@ -73,7 +84,7 @@ function App() {
                     placeholder="Mesajınızı yazın..."
                     disabled={isLoading}
                 />
-                <button onClick={handleSendMessage} disabled={isLoading || !input.trim()}>
+                <button onClick={() => handleSendMessage()} disabled={isLoading || !input.trim()}>
                     Gönder
                 </button>
             </div>
