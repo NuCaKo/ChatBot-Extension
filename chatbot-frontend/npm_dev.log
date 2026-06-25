@@ -1,0 +1,28 @@
+
+> chatbot-frontend@0.0.0 dev
+> vite
+
+
+  VITE v5.4.21  ready in 267 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+11:37:51 AM [vite] hmr update /src/App.jsx
+11:37:56 AM [vite] hmr update /src/components/QuickReplies.jsx
+11:41:38 AM [vite] hmr update /src/components/ComparisonTable.jsx
+11:41:44 AM [vite] hmr update /src/App.css
+11:59:54 AM [vite] hmr update /src/App.jsx
+1:19:13 PM [vite] page reload index.html
+1:19:13 PM [vite] hmr update /src/App.css
+1:19:13 PM [vite] hmr update /src/App.jsx
+1:19:13 PM [vite] hmr update /src/index.css
+1:19:13 PM [vite] page reload src/main.jsx
+1:19:13 PM [vite] hmr update /src/components/BotMessage.jsx
+1:19:13 PM [vite] hmr update /src/components/ComparisonTable.jsx
+1:19:13 PM [vite] hmr update /src/components/ProductCard.jsx
+1:19:13 PM [vite] hmr update /src/components/ProductCarousel.jsx
+1:19:13 PM [vite] hmr update /src/components/QuickReplies.jsx
+1:19:13 PM [vite] hmr update /src/components/SupportSteps.jsx
+1:19:13 PM [vite] vite.config.js changed, restarting server...
+(!) Could not auto-determine entry point from rollupOptions or html files and there are no explicit optimizeDeps.include patterns. Skipping dependency pre-bundling.
+1:19:13 PM [vite] server restarted.
